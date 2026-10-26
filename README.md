@@ -6,7 +6,11 @@
 
 *Ghi chép thu/chi nhanh chóng · Trực quan hóa dòng tiền · Cảnh báo chủ động*
 
-[![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-Trải_nghiệm_ngay-success?style=for-the-badge)](https://fintrack-personal-finance-7b52.onrender.com/)
+<br/>
+
+> 🌐 **Trải nghiệm ứng dụng (Live Demo):** [https://fintrack-personal-finance-7b52.onrender.com/](https://fintrack-personal-finance-7b52.onrender.com/)
+
+<br/>
 
 ![Node.js](https://img.shields.io/badge/Node.js-20+-339933?style=flat-square&logo=nodedotjs&logoColor=white)
 ![React](https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react&logoColor=black)
@@ -28,7 +32,7 @@
 
 Dự án minh họa kiến trúc **Event-Driven** (hướng sự kiện) kết hợp **Microservices pattern** (mô phỏng Message Queue), xác thực bảo mật đa tầng, và tích hợp Trí tuệ Nhân tạo (AI Gemini) vào quy trình nhập liệu.
 
-🌐 **Trải nghiệm ứng dụng trực tuyến tại:** [https://fintrack-personal-finance-7b52.onrender.com/](https://fintrack-personal-finance-7b52.onrender.com/)
+🌐 **Link Website (Demo):** [https://fintrack-personal-finance-7b52.onrender.com/](https://fintrack-personal-finance-7b52.onrender.com/)
 
 ### ✨ Điểm nổi bật
 
