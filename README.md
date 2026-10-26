@@ -90,6 +90,8 @@ npm run dev
 
 ## 3. Kiến trúc Hệ thống
 
+## 3. Kiến trúc Hệ thống
+
 <p align="center">
   <img src="./kientruc.png" width="60%" />
 </p>
