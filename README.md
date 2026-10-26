@@ -1,9 +1,3 @@
-
----
-
-Nếu bạn cần dán lại **toàn bộ file README** (đã được sắp xếp đúng thứ tự: Giới thiệu -> Cài đặt -> Kiến trúc -> API -> Kỹ thuật -> Phân công -> Hạn chế) để thay thế hoàn toàn, đây là bản chuẩn không bị lỗi:
-
-```markdown
 <div align="center">
 
 # 💰 FinTrack
@@ -64,89 +58,114 @@ Dự án minh họa kiến trúc **Event-Driven** (hướng sự kiện) kết h
 git clone https://github.com/hnbtram/fintrack-personal-finance.git
 cd fintrack-personal-finance
 npm install
-Bước 2 — Cấu hình .env
-Tạo file .env ở thư mục gốc:
+```
 
-env
+### Bước 2 — Cấu hình `.env`
+
+Tạo file `.env` ở thư mục gốc:
+
+```env
 PORT=8080
 MONGO_URI=mongodb+srv://<user>:<password>@<cluster>/<db>
 AUTH_SECRET=<chuoi-bi-mat-ngau-nhien-dai>
 GEMINI_API_KEY=<khong-bat-buoc>
-🔑 Biến	Bắt buộc	📝 Ghi chú
-MONGO_URI	✅	Chuỗi kết nối MongoDB
-AUTH_SECRET	⚠️	Khóa ký token (Nên có)
-GEMINI_API_KEY	❌	Dùng cho tính năng nhập nhanh bằng AI
-PORT	❌	Mặc định 8080
-Bước 3 — Khởi chạy
-bash
+```
+
+| 🔑 Biến | Bắt buộc | 📝 Ghi chú |
+|:---|:---:|:---|
+| `MONGO_URI` | ✅ | Chuỗi kết nối MongoDB |
+| `AUTH_SECRET` | ⚠️ | Khóa ký token (Nên có) |
+| `GEMINI_API_KEY`| ❌ | Dùng cho tính năng nhập nhanh bằng AI |
+| `PORT` | ❌ | Mặc định `8080` |
+
+### Bước 3 — Khởi chạy
+
+```bash
 npm run dev
-Ứng dụng sẽ khởi động tại: http://localhost:8080
+```
 
-3. Kiến trúc Hệ thống
-<p align="center"> <img src="./kientruc.png" width="60%" /> </p>
-Luồng xử lý sự kiện tạo giao dịch:
+Ứng dụng sẽ khởi động tại: **`http://localhost:8080`**
 
-Lưu giao dịch vào MongoDB (kèm userId).
+---
 
-Phát event transaction.created vào transaction-exchange.
+## 3. Kiến trúc Hệ thống
 
-Budget Worker tiếp nhận, so sánh chi tiêu với ngân sách của User đó.
+<p align="center">
+  <img src="./kientruc.png" width="60%" />
+</p>
 
-Ghi kết quả vào budget-evaluation-queue (nếu trong hạn mức) hoặc notification-queue (nếu vượt).
+**Luồng xử lý sự kiện tạo giao dịch:**
+1. Lưu giao dịch vào MongoDB (kèm `userId`).
+2. Phát event `transaction.created` vào `transaction-exchange`.
+3. Budget Worker tiếp nhận, so sánh chi tiêu với ngân sách của User đó.
+4. Ghi kết quả vào `budget-evaluation-queue` (nếu trong hạn mức) hoặc `notification-queue` (nếu vượt).
 
-4. Danh sách REST API
-Method	Endpoint	Auth	Mô tả
-GET	/api/health	❌	Kiểm tra trạng thái server & MongoDB
-POST	/api/auth/register	❌	Đăng ký tài khoản
-POST	/api/auth/login	❌	Đăng nhập, nhận token
-GET	/api/auth/me	✅	Lấy thông tin user hiện tại
-GET	/api/transactions	✅	Lấy danh sách giao dịch (lọc theo tháng, loại, search)
-POST	/api/transactions	✅	Tạo giao dịch mới (phát event Queue)
-PUT	/api/transactions/:id	✅	Cập nhật giao dịch
-DELETE	/api/transactions/:id	✅	Xóa giao dịch
-GET	/api/budgets	✅	Lấy danh sách ngân sách & tiến độ của user
-POST	/api/budgets	✅	Thiết lập/Cập nhật ngân sách
-GET	/api/stats	✅	Thống kê số dư, tỷ lệ tiết kiệm, biểu đồ
-POST	/api/ai/classify	❌	AI phân tích câu lệnh ngôn ngữ tự nhiên
-GET	/api/queue	❌	Xem log Message Queue
-GET	/api/test/run	❌	Dữ liệu cho cửa sổ báo cáo kiểm thử
-POST	/api/reset	❌	Reset dữ liệu mẫu (Dùng khi demo)
-5. Kỹ thuật nổi bật & Phục vụ phản biện
-Kỹ thuật	Chi tiết triển khai
-Validation đa tầng	Client báo lỗi thời gian thực (số âm, nhập chữ). Server trả HTTP 400 nếu dữ liệu sai. Tích hợp cụm nút "Thử nghiệm Validate Nhanh".
-Bảo mật	Mật khẩu dùng scrypt + salt, so sánh timingSafeEqual. Token HMAC-SHA256 (hạn 7 ngày). Dữ liệu gắn chặt với userId.
-Xử lý ngày tháng	Lưu dạng YYYY-MM-DD và lọc theo YYYY-MM để tránh lỗi lệch múi giờ.
-Nén ảnh Locket	Dùng HTML5 canvas resize cạnh dài ≤ 800px, xuất JPEG 0.82, lưu Base64.
-Message Queue	Mô phỏng RabbitMQ chạy in-process, tách biệt luồng lưu giao dịch và kiểm tra ngân sách.
-6. Bảng Phân công (4 Thành viên)
-STT	Thành viên	Nhiệm vụ chính	Đóng góp
-1	Nguyễn Yến Nhi
-24100372	Khởi tạo repo, cấu hình backend Express, Data Models, CRUD Giao dịch & Validation	25%
-2	Hoàng Nhật Bảo Trâm
-24100260	Giao diện chính React 19, Header, Form giao dịch, Danh sách giao dịch, Auth & Welcome Page	25%
-3	Nguyễn Thuỳ Dương
-24107946	Biểu đồ SVG Donut & Bar Chart, Module Ngân sách, Dạng xem Lịch Chi tiêu & Lưu trữ ảnh Locket	25%
-4	Nguyễn Thị Kim Oanh
-24100459	AI Gemini & NLP Parser, Message Queue Monitor, Cửa sổ báo cáo & kiểm thử, Slide & Báo cáo	25%
-<details> <summary><b>📁 Xem chi tiết các Files phụ trách (Click để mở)</b></summary>
-Thành viên 1 (Nhi): server.ts, src/types.ts, src/services/api.ts, package.json
+---
 
-Thành viên 2 (Trâm): src/App.tsx, Header.tsx, OverviewCards.tsx, TransactionModal.tsx, TransactionList.tsx, AuthModal.tsx, WelcomePage.tsx, auth.ts, constants.ts
+## 4. Danh sách REST API
 
-Thành viên 3 (Dương): CalendarView.tsx, LocketGalleryView.tsx, PhotoDetailModal.tsx, ChartsView.tsx, BudgetView.tsx
+| Method | Endpoint | Auth | Mô tả |
+|:---:|:---|:---:|:---|
+| `GET` | `/api/health` | ❌ | Kiểm tra trạng thái server & MongoDB |
+| `POST` | `/api/auth/register` | ❌ | Đăng ký tài khoản |
+| `POST` | `/api/auth/login` | ❌ | Đăng nhập, nhận token |
+| `GET` | `/api/auth/me` | ✅ | Lấy thông tin user hiện tại |
+| `GET` | `/api/transactions` | ✅ | Lấy danh sách giao dịch (lọc theo tháng, loại, search) |
+| `POST` | `/api/transactions` | ✅ | Tạo giao dịch mới (phát event Queue) |
+| `PUT` | `/api/transactions/:id` | ✅ | Cập nhật giao dịch |
+| `DELETE` | `/api/transactions/:id` | ✅ | Xóa giao dịch |
+| `GET` | `/api/budgets` | ✅ | Lấy danh sách ngân sách & tiến độ của user |
+| `POST` | `/api/budgets` | ✅ | Thiết lập/Cập nhật ngân sách |
+| `GET` | `/api/stats` | ✅ | Thống kê số dư, tỷ lệ tiết kiệm, biểu đồ |
+| `POST` | `/api/ai/classify` | ❌ | AI phân tích câu lệnh ngôn ngữ tự nhiên |
+| `GET` | `/api/queue` | ❌ | Xem log Message Queue |
+| `GET` | `/api/test/run` | ❌ | Dữ liệu cho cửa sổ báo cáo kiểm thử |
+| `POST` | `/api/reset` | ❌ | Reset dữ liệu mẫu (Dùng khi demo) |
 
-Thành viên 4 (Oanh): AIQuickEntry.tsx, QueueMonitorModal.tsx, DefenseHubModal.tsx, README.md
+---
+
+## 5. Kỹ thuật nổi bật & Phục vụ phản biện
+
+| Kỹ thuật | Chi tiết triển khai |
+|:---|:---|
+| **Validation đa tầng** | Client báo lỗi thời gian thực (số âm, nhập chữ). Server trả `HTTP 400` nếu dữ liệu sai. Tích hợp cụm nút "Thử nghiệm Validate Nhanh". |
+| **Bảo mật** | Mật khẩu dùng `scrypt` + salt, so sánh `timingSafeEqual`. Token HMAC-SHA256 (hạn 7 ngày). Dữ liệu gắn chặt với `userId`. |
+| **Xử lý ngày tháng** | Lưu dạng `YYYY-MM-DD` và lọc theo `YYYY-MM` để tránh lỗi lệch múi giờ. |
+| **Nén ảnh Locket** | Dùng HTML5 `canvas` resize cạnh dài ≤ 800px, xuất JPEG 0.82, lưu Base64. |
+| **Message Queue** | Mô phỏng RabbitMQ chạy in-process, tách biệt luồng lưu giao dịch và kiểm tra ngân sách. |
+
+---
+
+## 6. Bảng Phân công (4 Thành viên)
+
+| STT | Thành viên | Nhiệm vụ chính | Đóng góp |
+|:---:|:---|:---|:---:|
+| 1 | **Nguyễn Yến Nhi**<br/>`24100372` | Khởi tạo repo, cấu hình backend Express, Data Models, CRUD Giao dịch & Validation | **25%** |
+| 2 | **Hoàng Nhật Bảo Trâm**<br/>`24100260` | Giao diện chính React 19, Header, Form giao dịch, Danh sách giao dịch, Auth & Welcome Page | **25%** |
+| 3 | **Nguyễn Thuỳ Dương**<br/>`24107946` | Biểu đồ SVG Donut & Bar Chart, Module Ngân sách, Dạng xem Lịch Chi tiêu & Lưu trữ ảnh Locket | **25%** |
+| 4 | **Nguyễn Thị Kim Oanh**<br/>`24100459` | AI Gemini & NLP Parser, Message Queue Monitor, Cửa sổ báo cáo & kiểm thử, Slide & Báo cáo | **25%** |
+
+<details>
+<summary><b>📁 Xem chi tiết các Files phụ trách (Click để mở)</b></summary>
+
+- **Thành viên 1 (Nhi):** `server.ts`, `src/types.ts`, `src/services/api.ts`, `package.json`
+- **Thành viên 2 (Trâm):** `src/App.tsx`, `Header.tsx`, `OverviewCards.tsx`, `TransactionModal.tsx`, `TransactionList.tsx`, `AuthModal.tsx`, `WelcomePage.tsx`, `auth.ts`, `constants.ts`
+- **Thành viên 3 (Dương):** `CalendarView.tsx`, `LocketGalleryView.tsx`, `PhotoDetailModal.tsx`, `ChartsView.tsx`, `BudgetView.tsx`
+- **Thành viên 4 (Oanh):** `AIQuickEntry.tsx`, `QueueMonitorModal.tsx`, `DefenseHubModal.tsx`, `README.md`
 
 </details>
-7. Hạn chế hiện tại
-API phụ chưa bảo vệ: Các API /api/ai/classify, /api/queue và /api/reset hiện chưa yêu cầu đăng nhập (chỉ phục vụ mục đích demo).
 
-Fallback AI: Khi thiếu GEMINI_API_KEY hoặc Gemini lỗi, AI trả kết quả mặc định (số tiền 0, danh mục "Khác").
+---
 
-Biểu đồ cột: /api/stats đang trả dailyStats rỗng nên biểu đồ cột theo ngày bị trống (Donut và thẻ tổng quan vẫn hoạt động tốt).
+## 7. Hạn chế hiện tại
 
-Test case: /api/test/run chưa trả đúng cấu trúc dữ liệu cho cửa sổ báo cáo.
+- **API phụ chưa bảo vệ:** Các API `/api/ai/classify`, `/api/queue` và `/api/reset` hiện chưa yêu cầu đăng nhập (chỉ phục vụ mục đích demo).
+- **Fallback AI:** Khi thiếu `GEMINI_API_KEY` hoặc Gemini lỗi, AI trả kết quả mặc định (số tiền `0`, danh mục `"Khác"`).
+- **Biểu đồ cột:** `/api/stats` đang trả `dailyStats` rỗng nên biểu đồ cột theo ngày bị trống (Donut và thẻ tổng quan vẫn hoạt động tốt).
+- **Test case:** `/api/test/run` chưa trả đúng cấu trúc dữ liệu cho cửa sổ báo cáo.
+- **Tài khoản:** Chưa hỗ trợ đổi mật khẩu và quên mật khẩu.
 
-Tài khoản: Chưa hỗ trợ đổi mật khẩu và quên mật khẩu.
-
-<div align="center"> <br/> <i>Made with ❤️ for Lập trình Web Nâng cao</i> </div> ```
+<div align="center">
+<br/>
+<i>Made with ❤️ for Lập trình Web Nâng cao</i>
+</div>
