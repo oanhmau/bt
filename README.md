@@ -1,3 +1,9 @@
+
+---
+
+Nếu bạn cần dán lại **toàn bộ file README** (đã được sắp xếp đúng thứ tự: Giới thiệu -> Cài đặt -> Kiến trúc -> API -> Kỹ thuật -> Phân công -> Hạn chế) để thay thế hoàn toàn, đây là bản chuẩn không bị lỗi:
+
+```markdown
 <div align="center">
 
 # 💰 FinTrack
@@ -20,7 +26,7 @@
 
 ---
 
-## 📖 Giới thiệu
+## 1. Giới thiệu
 
 **FinTrack** là ứng dụng full-stack hỗ trợ người dùng (sinh viên, nhân viên văn phòng) ghi chép thu/chi hàng ngày, trực quan hóa dòng tiền và cảnh báo chủ động khi chi tiêu vượt hạn mức ngân sách tháng.
 
@@ -53,6 +59,7 @@ Dự án minh họa kiến trúc **Event-Driven** (hướng sự kiện) kết h
 **Yêu cầu:** Node.js 20+ và cụm MongoDB (Atlas).
 
 ### Bước 1 — Cài đặt thư viện
+
 ```bash
 git clone https://github.com/hnbtram/fintrack-personal-finance.git
 cd fintrack-personal-finance
