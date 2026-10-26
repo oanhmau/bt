@@ -1,4 +1,4 @@
-<img width="3200" height="2220" alt="fintrack-architecture" src="https://github.com/user-attachments/assets/ea1cd18a-0187-4003-b800-5c4c6bdd1920" />
+
 <div align="center">
 
 # 💰 FinTrack
@@ -89,7 +89,6 @@ npm run dev
 
 ---
 
-## 3. Kiến trúc Hệ thống
 
 ## 3. Kiến trúc Hệ thống
 
