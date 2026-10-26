@@ -18,6 +18,7 @@
 ![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-47A248?style=flat-square&logo=mongodb&logoColor=white)
 ![Gemini](https://img.shields.io/badge/AI-Gemini-4285F4?style=flat-square&logo=google&logoColor=white)
 ![TailwindCSS](https://img.shields.io/badge/Tailwind-38B2AC?style=flat-square&logo=tailwind-css&logoColor=white)
+![Claude](https://img.shields.io/badge/Code_Support-Claude_AI-D97757?style=flat-square)
 
 **Môn học:** Lập trình Web Nâng cao  
 **Đề tài:** Ứng dụng Quản lý Chi tiêu Cá nhân
@@ -33,6 +34,8 @@
 Dự án minh họa kiến trúc **Event-Driven** (hướng sự kiện) kết hợp **Microservices pattern** (mô phỏng Message Queue), xác thực bảo mật đa tầng, và tích hợp Trí tuệ Nhân tạo (AI Gemini) vào quy trình nhập liệu.
 
 🌐 **Link Website (Demo):** [https://fintrack-personal-finance-7b52.onrender.com/](https://fintrack-personal-finance-7b52.onrender.com/)
+
+> 🤖 **Ghi chú:** Quá trình phát triển, viết và tối ưu hóa các file mã nguồn trong dự án có sự hỗ trợ đắc lực từ **Claude AI**.
 
 ### ✨ Điểm nổi bật
 
