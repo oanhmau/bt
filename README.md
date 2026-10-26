@@ -1,4 +1,3 @@
-
 <div align="center">
 
 # 💰 FinTrack
@@ -6,6 +5,8 @@
 **Ứng dụng Quản lý Chi tiêu Cá nhân Thông minh (Personal Finance Tracker)**
 
 *Ghi chép thu/chi nhanh chóng · Trực quan hóa dòng tiền · Cảnh báo chủ động*
+
+[![Live Demo](https://img.shields.io/badge/🌐_Live_Demo-Trải_nghiệm_ngay-success?style=for-the-badge)](https://fintrack-personal-finance-7b52.onrender.com/)
 
 ![Node.js](https://img.shields.io/badge/Node.js-20+-339933?style=flat-square&logo=nodedotjs&logoColor=white)
 ![React](https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react&logoColor=black)
@@ -26,6 +27,8 @@
 **FinTrack** là ứng dụng full-stack hỗ trợ người dùng (sinh viên, nhân viên văn phòng) ghi chép thu/chi hàng ngày, trực quan hóa dòng tiền và cảnh báo chủ động khi chi tiêu vượt hạn mức ngân sách tháng.
 
 Dự án minh họa kiến trúc **Event-Driven** (hướng sự kiện) kết hợp **Microservices pattern** (mô phỏng Message Queue), xác thực bảo mật đa tầng, và tích hợp Trí tuệ Nhân tạo (AI Gemini) vào quy trình nhập liệu.
+
+🌐 **Trải nghiệm ứng dụng trực tuyến tại:** [https://fintrack-personal-finance-7b52.onrender.com/](https://fintrack-personal-finance-7b52.onrender.com/)
 
 ### ✨ Điểm nổi bật
 
@@ -89,7 +92,6 @@ npm run dev
 
 ---
 
-
 ## 3. Kiến trúc Hệ thống
 
 <p align="center">
@@ -143,17 +145,17 @@ npm run dev
 | STT | Thành viên | Nhiệm vụ chính | Đóng góp |
 |:---:|:---|:---|:---:|
 | 1 | **Nguyễn Yến Nhi**<br/>`24100372` | Khởi tạo repo, cấu hình backend Express, Data Models, CRUD Giao dịch & Validation | **25%** |
-| 2 | **Hoàng Nhật Bảo Trâm**<br/>`24100260` | Giao diện chính React 19, Header, Form giao dịch, Danh sách giao dịch, Auth & Welcome Page | **25%** |
+| 2 | **Hoàng Nhật Bảo Trâm**<br/>`24100260` | Giao diện chính React 19, Header, thẻ tổng quan, Form thêm/sửa giao dịch, Cụm nút demo kiểm tra lỗi, Danh sách giao dịch & Xuất CSV, Tích hợp MongoDB | **25%** |
 | 3 | **Nguyễn Thuỳ Dương**<br/>`24107946` | Biểu đồ SVG Donut & Bar Chart, Module Ngân sách, Dạng xem Lịch Chi tiêu & Lưu trữ ảnh Locket | **25%** |
-| 4 | **Nguyễn Thị Kim Oanh**<br/>`24100459` | AI Gemini & NLP Parser, Message Queue Monitor, Cửa sổ báo cáo & kiểm thử, Slide & Báo cáo | **25%** |
+| 4 | **Nguyễn Thị Kim Oanh**<br/>`24100459` | AI Gemini & NLP Parser, Message Queue Monitor, Cửa sổ báo cáo & kiểm thử, **Đăng ký / Đăng nhập / Trang chào mừng**, Slide & Báo cáo | **25%** |
 
 <details>
 <summary><b>📁 Xem chi tiết các Files phụ trách (Click để mở)</b></summary>
 
 - **Thành viên 1 (Nhi):** `server.ts`, `src/types.ts`, `src/services/api.ts`, `package.json`
-- **Thành viên 2 (Trâm):** `src/App.tsx`, `Header.tsx`, `OverviewCards.tsx`, `TransactionModal.tsx`, `TransactionList.tsx`, `AuthModal.tsx`, `WelcomePage.tsx`, `auth.ts`, `constants.ts`
+- **Thành viên 2 (Trâm):** `src/App.tsx`, `Header.tsx`, `OverviewCards.tsx`, `TransactionModal.tsx`, `TransactionList.tsx`, `constants.ts`
 - **Thành viên 3 (Dương):** `CalendarView.tsx`, `LocketGalleryView.tsx`, `PhotoDetailModal.tsx`, `ChartsView.tsx`, `BudgetView.tsx`
-- **Thành viên 4 (Oanh):** `AIQuickEntry.tsx`, `QueueMonitorModal.tsx`, `DefenseHubModal.tsx`, `README.md`
+- **Thành viên 4 (Oanh):** `AIQuickEntry.tsx`, `QueueMonitorModal.tsx`, `DefenseHubModal.tsx`, `AuthModal.tsx`, `WelcomePage.tsx`, `auth.ts`, `README.md`
 
 </details>
 
